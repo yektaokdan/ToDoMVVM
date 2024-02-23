@@ -37,7 +37,7 @@ class RegisterVC: UIViewController {
         ])
         
         func setupTextFields() {
-            // Kullanıcı adı TextField ayarları
+           
             usernameTextField.translatesAutoresizingMaskIntoConstraints = false
             usernameTextField.borderStyle = .roundedRect
             let usernamePlaceholder = NSAttributedString(string: "Username",
@@ -48,7 +48,7 @@ class RegisterVC: UIViewController {
             usernameTextField.layer.cornerRadius = 10
             usernameTextField.layer.borderColor = myButtonColor?.cgColor
             
-            // Şifre TextField ayarları
+          
             passwordTextField.translatesAutoresizingMaskIntoConstraints = false
             passwordTextField.borderStyle = .roundedRect
             let passwordPlaceholder = NSAttributedString(string: "Password",
@@ -60,18 +60,18 @@ class RegisterVC: UIViewController {
             passwordTextField.layer.cornerRadius = 10
             passwordTextField.layer.borderColor = myButtonColor?.cgColor
             
-            // TextField'ları view'a ekle
+            
             view.addSubview(usernameTextField)
             view.addSubview(passwordTextField)
             
             NSLayoutConstraint.activate([
-                // Kullanıcı adı TextField'ını merkezle ve genişliğini ayarla
+                
                 usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 usernameTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
                 usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 usernameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
                 
-                // Şifre TextField'ını kullanıcı adı TextField'ının hemen altına yerleştir
+                
                 passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 15),
                 passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

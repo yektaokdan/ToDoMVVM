@@ -22,10 +22,10 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         self.navigationItem.hidesBackButton = true
-        // TableView'i view'a ekleyin
+        
         view.addSubview(tableView)
         
-        // TableView için constraints ayarlayın
+      
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -34,7 +34,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
         ])
         
-        // Cell kaydı
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewItem))
         

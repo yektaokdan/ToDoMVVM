@@ -20,12 +20,12 @@ class LoginViewModel{
             
             Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
                 if let error = error {
-                    // Hata durumunda hata mesajını gönder
+                    
                     self?.onLoginFailure?(error)
                     return
                 }
                 
-                // Giriş başarılı olduğunda ilgili işlemi yap
+                
                 self?.onLoginSuccess?()
             }
         }

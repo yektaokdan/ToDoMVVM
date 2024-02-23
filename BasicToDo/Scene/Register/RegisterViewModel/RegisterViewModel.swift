@@ -20,12 +20,12 @@ class RegisterViewModel{
             
             Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
                 if let error = error {
-                    // Hata durumunda hata mesajını gönder
+                    
                     self?.onCreateFailure?(error)
                     return
                 }
                 
-                // Giriş başarılı olduğunda ilgili işlemi yap
+                
                 self?.onCreateSuccess?()
             }
         }
