@@ -37,7 +37,9 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewItem))
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Çıkış Yap", style: .plain, target: self, action: #selector(signOutTapped))
+
+        viewModel.fetchItems(tableView:tableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,8 +55,7 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if editingStyle == .delete {
-                viewModel.deleteItem(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                viewModel.deleteItem(at: indexPath.row, tableView: tableView)
             }
         }
         
@@ -73,15 +74,27 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let addAction = UIAlertAction(title: alertConstants.addToDoAppAddAction, style: .default) { [weak self] _ in
             if let title = alertController.textFields?.first?.text, !title.isEmpty {
                 
-                self?.viewModel.addItem(title: title)
-                self?.tableView.reloadData()
+                self?.viewModel.addItem(title: title, tableView: self!.tableView)
             }
         }
         alertController.addAction(addAction)
         let cancelAction = UIAlertAction(title: alertConstants.addToDoAppCancelAction, style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-        
         present(alertController, animated: true, completion: nil)
+    }
+    @objc func signOutTapped() {
+        viewModel.signOut { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Çıkış yaparken hata oluştu: \(error.localizedDescription)")
+                } else {
+                    guard let self = self else { return }
+                    let loginVC = LoginVC()
+                    loginVC.modalPresentationStyle = .fullScreen
+                    self.present(loginVC, animated: true, completion: nil)
+                }
+            }
+        }
     }
 
 }

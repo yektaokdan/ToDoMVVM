@@ -81,6 +81,7 @@ class RegisterVC: UIViewController {
         setupTextFields()
     }
     @objc func buttonAction(sender: UIButton!) {
+        
         guard let email = usernameTextField.text, !email.isEmpty,
                       let password = passwordTextField.text, !password.isEmpty else {
                     print("Email or/and password cannot null.")
@@ -89,6 +90,8 @@ class RegisterVC: UIViewController {
         registerViewModel.email = email
         registerViewModel.password = password
         registerViewModel.createUser()
+        let loginVC = LoginVC()
+        self.navigationController?.pushViewController(loginVC, animated: true)
         }
     }
 
